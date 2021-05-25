@@ -1,45 +1,91 @@
 #include <Arduino.h>
-#include <ShiftRegister74HC595.h>
+#include <FastLED.h>
 
 #include "utils/utils.h"
 
-#define DATA_PIN 2
-#define CLOCK_PIN 3
-#define LATCH_PIN 4
+#define LED_D1 2
+#define NUM_LEDS 12
 
-ShiftRegister74HC595<2> sr(DATA_PIN, CLOCK_PIN, LATCH_PIN);
+#define YELLOW CRGB(0xeaf70c)
+#define GREEN CRGB(0xf70c23)
+#define RED CRGB(0x44f70c)
+#define BLUE CRGB(0x0c30f7)
 
-int arr[] = {1,4,2,7,5,8,9,0};
+#define DELAY_BY 500
+
+CRGB leds[NUM_LEDS];
+
+int arr[] = {1,4,2,7,5,8,9,0,13,45,11,3};
 
 void bubbleSort(int* a, int n) {
   int i, j;
 
   for (i = 1; i < n; i++) {
     for (j = 0; j < n - i; j++) {
-      delay(300);
-      sr.setNoUpdate(j*2+1, 1);
-      sr.setNoUpdate(j*2+3, 1);
-      sr.updateRegisters();
-      delay(300);
+      delay(DELAY_BY);
+      leds[j] = YELLOW;
+      leds[j+1] = YELLOW;
+      FastLED.show();
+      delay(DELAY_BY);
 
       if (a[j] > a[j+1]) {
+        leds[j] = BLUE;
+        leds[j+1] = BLUE;
+        FastLED.show();
         swap(&a[j], &a[j+1]);
+        delay(DELAY_BY);
       }
 
-      sr.setNoUpdate(j*2+1, 0);
-      sr.setNoUpdate(j*2+3, 0);
-      sr.updateRegisters();
-      delay(300);
+      leds[j] = RED;
+      leds[j+1] = RED;
+      FastLED.show();
+      delay(DELAY_BY);
     }
-    sr.set(n*2 - (i*2), 1);
+
+    leds[n-i] = GREEN;
+    FastLED.show();
+    delay(DELAY_BY);
   }
-  sr.set(0, 1);
+  leds[0] = GREEN;
+  FastLED.show();
+}
+
+int minInArray(int* array, int n) {
+  int i, min = 0;
+  for (i = 1; i < n; i++) {
+    // sr.set(i*2+1, 1);
+    if (array[min] > array[i]) {
+      min = i;
+    }
+    // sr.set(i*2+1, 0);
+  }
+  return min;
+}
+
+void selectionSort(int* a, int n) {
+  int i, min;
+  for (i = 0; i < n-1; i++) {
+    min = minInArray(a+i, n-i) + i;
+    swap(a+i, a+min);
+    // sr.set(i*2, 1);
+    delay(700);
+  }
+  // sr.set(14, 1);
 }
 
 void setup() {
-  sr.setAllLow();
+  FastLED.addLeds<WS2812B, LED_D1>(leds, NUM_LEDS);
+  FastLED.setBrightness(30);
+  FastLED.clear(true);
 
-  bubbleSort(arr, 8);
+  bubbleSort(arr, 12);
+
+  // for (int i = 0; i < 12; i++) {
+  //   leds[i] = CRGB(RED);
+  //   FastLED.show();
+  //   delay(500);
+  // }
+  // selectionSort(arr, 12);
 }
 
 void loop() {}
