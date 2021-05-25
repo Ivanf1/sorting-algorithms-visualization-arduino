@@ -10,8 +10,9 @@
 #define GREEN CRGB(0xf70c23)
 #define RED CRGB(0x44f70c)
 #define BLUE CRGB(0x0c30f7)
+#define NO_COLOR CRGB(0x000000)
 
-#define DELAY_BY 500
+#define DELAY_BY 700
 
 CRGB leds[NUM_LEDS];
 
@@ -52,13 +53,32 @@ void bubbleSort(int* a, int n) {
 
 int minInArray(int* array, int n) {
   int i, min = 0;
+  leds[NUM_LEDS-n] = BLUE;
+  FastLED.show();
+  delay(DELAY_BY);
+
   for (i = 1; i < n; i++) {
-    // sr.set(i*2+1, 1);
+    leds[NUM_LEDS-n+i] = YELLOW;
+    FastLED.show();
+    delay(DELAY_BY);
+
     if (array[min] > array[i]) {
+      leds[NUM_LEDS-n+min] = NO_COLOR;
       min = i;
+      leds[NUM_LEDS-n+i] = BLUE;
+      FastLED.show();
+      delay(DELAY_BY);
     }
-    // sr.set(i*2+1, 0);
+
+    if (leds[NUM_LEDS-n+i] == YELLOW) {
+      leds[NUM_LEDS-n+i] = NO_COLOR;
+    }
+    FastLED.show();
+    delay(DELAY_BY);
   }
+
+  leds[NUM_LEDS-n+min] = NO_COLOR;
+  FastLED.show();
   return min;
 }
 
@@ -67,10 +87,12 @@ void selectionSort(int* a, int n) {
   for (i = 0; i < n-1; i++) {
     min = minInArray(a+i, n-i) + i;
     swap(a+i, a+min);
-    // sr.set(i*2, 1);
-    delay(700);
+    leds[i] = GREEN;
+    FastLED.show();
+    delay(DELAY_BY);
   }
-  // sr.set(14, 1);
+  leds[n-1] = GREEN;
+  FastLED.show();
 }
 
 void setup() {
@@ -78,14 +100,9 @@ void setup() {
   FastLED.setBrightness(30);
   FastLED.clear(true);
 
-  bubbleSort(arr, 12);
+  // bubbleSort(arr, 12);
 
-  // for (int i = 0; i < 12; i++) {
-  //   leds[i] = CRGB(RED);
-  //   FastLED.show();
-  //   delay(500);
-  // }
-  // selectionSort(arr, 12);
+  selectionSort(arr, 12);
 }
 
 void loop() {}
