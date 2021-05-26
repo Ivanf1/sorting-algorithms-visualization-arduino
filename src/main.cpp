@@ -12,11 +12,11 @@
 #define BLUE CRGB(0x0c30f7)
 #define NO_COLOR CRGB(0x000000)
 
-#define DELAY_BY 700
+#define DELAY_BY 400
 
 CRGB leds[NUM_LEDS];
 
-int arr[] = {1,4,2,7,5,8,9,0,13,45,11,3};
+int arr[NUM_LEDS] = {};
 
 void bubbleSort(int* a, int n) {
   int i, j;
@@ -97,12 +97,18 @@ void selectionSort(int* a, int n) {
 
 void setup() {
   FastLED.addLeds<WS2812B, LED_D1>(leds, NUM_LEDS);
-  FastLED.setBrightness(30);
+  FastLED.setBrightness(35);
   FastLED.clear(true);
 
-  // bubbleSort(arr, 12);
+  randomArray(arr, NUM_LEDS);
 
-  selectionSort(arr, 12);
+  bubbleSort(arr, NUM_LEDS);
+  FastLED.clear(true);
+
+  randomArray(arr, NUM_LEDS);
+
+  selectionSort(arr, NUM_LEDS);
+  FastLED.clear(true);
 }
 
 void loop() {}
