@@ -9,6 +9,8 @@ Learn how different sorting alogorithms work by visualing the operations they pe
 - Blue - the elements swap their position
 - Green - ordered part of the array
 
+[![Bubble sort youtube](https://img.youtube.com/vi/eIUV1ZkxSJo/2.jpg)](https://www.youtube.com/watch?v=eIUV1ZkxSJo)
+
 ## Selection sort
 
 - Blue - current element with the minimum value
