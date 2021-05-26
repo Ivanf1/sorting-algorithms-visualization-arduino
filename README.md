@@ -16,3 +16,5 @@ Learn how different sorting alogorithms work by visualing the operations they pe
 - Blue - current element with the minimum value
 - Yellow - element that is checked against the current minimum (Blue). If this element value is lower than the current minimum, it will become the new minimum and change color to Blue
 - Green - ordered part of the array
+
+[![Selection sort youtube](https://img.youtube.com/vi/PDck_WnJOtI/2.jpg)](https://www.youtube.com/watch?v=PDck_WnJOtI)
