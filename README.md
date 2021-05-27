@@ -1,6 +1,6 @@
 # Sorting algorithms visualization on RGB LEDs with Arduino
 
-Learn how different sorting alogorithms work by visualing the operations they perform on RGB LEDs.
+Learn how different sorting algorithms work by visualizing the operations they perform on RGB LEDs.
 
 ## Bubble sort
 
@@ -18,3 +18,9 @@ Learn how different sorting alogorithms work by visualing the operations they pe
 - Green - ordered part of the array
 
 [![Selection sort youtube](https://img.youtube.com/vi/PDck_WnJOtI/2.jpg)](https://www.youtube.com/watch?v=PDck_WnJOtI)
+
+## Insertion sort
+
+- Blue - current element being checked
+- Yellow - elements already checked
+- Green - ordered array
