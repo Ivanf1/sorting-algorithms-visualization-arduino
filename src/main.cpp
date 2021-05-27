@@ -11,7 +11,7 @@
 
 CRGB leds[NUM_LEDS];
 
-int arr[NUM_LEDS] = {};
+int arr[NUM_LEDS] = {6,5,3,1,8,7,2,4,10,11,12,13};
 
 void bubbleSort(int* a, int n) {
   int i, j;
