@@ -1,5 +1,6 @@
-#include <Arduino.h>
 #include "utils/utils.h"
+
+#include <Arduino.h>
 
 void swap(int* a, int* b) {
   int temp = *a;
