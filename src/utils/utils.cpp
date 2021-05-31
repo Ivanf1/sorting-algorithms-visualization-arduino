@@ -13,3 +13,11 @@ void randomArray(int* a, int n) {
     a[i] = random(50);
   }
 }
+
+void printArray(int* a, int n) { 
+  for (int i = 0; i < n; i++) {
+    Serial.print(a[i]);
+    Serial.print(" ");
+  }
+  Serial.println();
+}

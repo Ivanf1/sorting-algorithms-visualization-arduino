@@ -3,5 +3,6 @@
 
 void swap(int* a, int* b);
 void randomArray(int* a, int n);
+void printArray(int* a, int n);
 
 #endif
